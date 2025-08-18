@@ -1,25 +1,48 @@
-[gd_scene load_steps=4 format=3 uid="uid://d4hj25sgyhk2m"]
+[gd_scene load_steps=7 format=3 uid="uid://d4hj25sgyhk2m"]
 
 [ext_resource type="Script" uid="uid://b16p4li4y7sca" path="res://player.gd" id="1_1g7ti"]
 [ext_resource type="Texture2D" uid="uid://bqjvf5jb5mt50" path="res://Sprites/SpinoPlayer.png" id="2_gvbdf"]
 [ext_resource type="Texture2D" uid="uid://qlk1uhcxmyi7" path="res://Sprites/fish_test.png" id="3_ftglr"]
+[ext_resource type="Script" uid="uid://b3r2h41k35tp6" path="res://sky.gd" id="4_3arrq"]
+[ext_resource type="Shader" uid="uid://fvd7tboc1aor" path="res://backgroundShader.gdshader" id="5_jesyq"]
 
-[node name="World2D" type="Node2D"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7k3ui"]
+shader = ExtResource("5_jesyq")
+shader_parameter/bottom_color = Vector4(0.4, 0.7, 1, 1)
+shader_parameter/top_color = Vector4(0, 0, 0.05, 1)
+
+[node name="World" type="Node2D"]
 
 [node name="Player" type="CharacterBody2D" parent="."]
 script = ExtResource("1_1g7ti")
 
-[node name="Sprite2D" type="Sprite2D" parent="Player"]
+[node name="Sprite" type="Sprite2D" parent="Player"]
 texture = ExtResource("2_gvbdf")
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Player"]
+[node name="CollisionPolygon" type="CollisionPolygon2D" parent="Player"]
 build_mode = 1
 polygon = PackedVector2Array(-773, 279, -745, 313, -320, 148, -254, 169, -246, 279, -214, 325, -187, 293, -189, 164, -38, 154, 33, 318, 15, 373, 29, 380, 75, 325, 50, 203, 102, 231, 144, 317, 139, 354, 151, 371, 197, 301, 100, 146, 316, 99, 487, 249, 632, 504, 795, 580, 813, 419, 728, 293, 687, 269, 475, 1, 296, -47, 170, -52, 315, -153, 306, -446, 50, -561, -310, -583, -540, -467, -677, -234, -645, -47, -534, 26, -570, 69, -720, 152, -814, 223, -810, 260)
 
-[node name="Camera2D" type="Camera2D" parent="Player"]
+[node name="Camera" type="Camera2D" parent="Player"]
 zoom = Vector2(0.25, 0.25)
 position_smoothing_enabled = true
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite" type="Sprite2D" parent="."]
 position = Vector2(-1399, -246)
 texture = ExtResource("3_ftglr")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="Sky" type="Node2D" parent="CanvasLayer"]
+script = ExtResource("4_3arrq")
+
+[node name="Background" type="ColorRect" parent="CanvasLayer/Sky"]
+material = SubResource("ShaderMaterial_7k3ui")
+offset_left = -2510.0
+offset_top = -8681.0
+offset_right = 2490.0
+offset_bottom = 6934.0
+mouse_filter = 2
+
+[node name="Clouds" type="Node2D" parent="CanvasLayer/Sky"]

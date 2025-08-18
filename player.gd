@@ -3,7 +3,7 @@ extends CharacterBody2D
 @export var acceleration: float = 300.0
 @export var max_speed: float = 150.0
 @export var friction: float = 200.0
-@export var buoyancy: float = 50.0  # how strong the natural upward drift is
+@export var buoyancy: float = 100.0  # how strong the natural upward drift is
 
 func _physics_process(delta):
 	var input_dir = Vector2.ZERO
@@ -16,9 +16,9 @@ func _physics_process(delta):
 	
 	# Vertical control
 	if Input.is_action_pressed("ui_down"):
-		input_dir.y += 1   # vent gas = sink
+		input_dir.y += 1
 	elif Input.is_action_pressed("ui_up"):
-		input_dir.y -= 1   # extra lift (like releasing ballast)
+		input_dir.y -= 1
 
 	# Apply buoyancy (natural upward drift) when NOT pressing down
 	if not Input.is_action_pressed("ui_down"):
