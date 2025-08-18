@@ -1,0 +1,4 @@
+res://playerMovements.tscn
+res://backgroundShader.gdshader
+res://player.gd
+res://ground.gd

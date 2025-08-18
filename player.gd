@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 @export var acceleration: float = 300.0
-@export var max_speed: float = 150.0
+@export var max_speed: float = 500.0
 @export var friction: float = 200.0
 @export var buoyancy: float = 100.0  # how strong the natural upward drift is
 

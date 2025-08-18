@@ -1,15 +1,18 @@
-[gd_scene load_steps=7 format=3 uid="uid://d4hj25sgyhk2m"]
+[gd_scene load_steps=9 format=3 uid="uid://d4hj25sgyhk2m"]
 
 [ext_resource type="Script" uid="uid://b16p4li4y7sca" path="res://player.gd" id="1_1g7ti"]
 [ext_resource type="Texture2D" uid="uid://bqjvf5jb5mt50" path="res://Sprites/SpinoPlayer.png" id="2_gvbdf"]
 [ext_resource type="Texture2D" uid="uid://qlk1uhcxmyi7" path="res://Sprites/fish_test.png" id="3_ftglr"]
 [ext_resource type="Script" uid="uid://b3r2h41k35tp6" path="res://sky.gd" id="4_3arrq"]
 [ext_resource type="Shader" uid="uid://fvd7tboc1aor" path="res://backgroundShader.gdshader" id="5_jesyq"]
+[ext_resource type="Script" uid="uid://co0sglt7oxqvk" path="res://ground.gd" id="6_7k3ui"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7k3ui"]
 shader = ExtResource("5_jesyq")
 shader_parameter/bottom_color = Vector4(0.4, 0.7, 1, 1)
 shader_parameter/top_color = Vector4(0, 0, 0.05, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7k3ui"]
 
 [node name="World" type="Node2D"]
 
@@ -46,3 +49,15 @@ offset_bottom = 6934.0
 mouse_filter = 2
 
 [node name="Clouds" type="Node2D" parent="CanvasLayer/Sky"]
+
+[node name="Ground" type="Node2D" parent="."]
+script = ExtResource("6_7k3ui")
+
+[node name="ColorRect" type="ColorRect" parent="Ground"]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Ground"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground/StaticBody2D"]
+shape = SubResource("RectangleShape2D_7k3ui")
